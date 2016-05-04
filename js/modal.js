@@ -77,10 +77,13 @@ common.Modal = function Modal(config) {
         }
 
         if (!$root) {
-            $root = $(getTemplate(config.templates.modal)).appendTo(config.appendTo);
+            $root = $(getTemplate(config.templates.modal))
+            $root.css('display', 'none');
+            $root.appendTo(config.appendTo);
+            $root.hide();
         }
 
-        if (!config.modalId) {
+        if (!config.modalId || !$root.attr('id') || $root.attr('id').indexOf(config.modalId) === -1 ) {
             $root.attr('id', self.modalId);
         }
 
@@ -158,4 +161,4 @@ common.Modal = function Modal(config) {
             self.render();
         }
     };
-}
+};
